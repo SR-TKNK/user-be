@@ -31,7 +31,7 @@ container.register({
     //Services
     loginService : awilix.asClass(loginService),
     //Models
-    userModel : awilix.asClass(userModel),
+    userModel : awilix.asValue(userModel),
     //Controllers
     authController : awilix.asClass(authController),
     //Daos

@@ -7,6 +7,6 @@
         "DOMAIN": "http://localhost:"
     },
     "Database": {
-        "connectionString": "mongodb+srv://admin:admin@market.sdvm0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+        "connectionString": "mongodb+srv://admin:admin@market.sdvm0.mongodb.net/Profile?retryWrites=true&w=majority"
     }
   }

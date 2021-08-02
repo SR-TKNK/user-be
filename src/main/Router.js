@@ -7,7 +7,7 @@ module.exports = ({ authRoutes }) => {
   router.use(cors({ exposedHeaders: "auth-token" }));
   router.use(express.json());
   router.use(express.urlencoded({ extended: true }));
-  router.use(cookieParser());
+  // router.use(cookieParser());
 
   router.use("/auth", authRoutes);
 

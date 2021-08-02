@@ -2,9 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config.json")
 
 module.exports = class Authentication {
-    constructor({ passwordHasher }) {
-        this.passwordHasher = passwordHasher;
-
+    constructor({}) {
         this.sign = this.sign.bind(this);
         this.verify = this.verify.bind(this);
         this.handleErrors = this.handleErrors.bind(this);
