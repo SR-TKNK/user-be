@@ -1,0 +1,12 @@
+{
+    "Server": {
+        "PORT": 8080,
+        "SECRET_KEY": "Secret",
+        "TIMEOUT": 1200000,
+        "IP": "http://localhost:3000",
+        "DOMAIN": "http://localhost:"
+    },
+    "Database": {
+        "connectionString": "mongodb+srv://admin:admin@market.sdvm0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    }
+  }

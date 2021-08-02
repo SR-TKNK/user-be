@@ -1,7 +1,9 @@
-class AuthLogin {
+module.exports = class AuthLogin {
     constructor({ authDaos, authentication }) {
         this.authDaos = authDaos;
         this.authentication = authentication;
+
+        this.execute = this.execute.bind(this);
     }
 
     async execute(params) {
@@ -23,8 +25,10 @@ class AuthLogin {
         return {
             token: this.authentication.sign(user._id),
             userId: user._id,
+            email: user.email,
+            isVIP: user.isVIP,
+            lastName: user.lastName,
+            firstName: user.firstName,
         };
     }
 }
-
-module.exports = AuthLogin;

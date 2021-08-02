@@ -1,17 +1,16 @@
-const container = require("../Container");
 const express = require("express");
 const config = require("../../config.json");
-const path = require("path");
+// const path = require("path");
 
 class Server {
   constructor({ router }) {
     this.app = express();
     this.app.use(router);
-    this.PORT = 8080;
+    this.PORT = config.Server.PORT;
   }
 
   start() {
-    const server = this.app.listen(this.PORT, "0.0.0.0", () => {
+    const server = this.app.listen(process.env.PORT || this.PORT, "0.0.0.0", () => {
       console.log(`Server is running on port ${this.PORT}`);
     });
     server.timeout = config.Server.TIMEOUT;

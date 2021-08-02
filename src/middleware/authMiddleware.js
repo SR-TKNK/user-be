@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 module.exports = class AuthMiddleware {
   constructor({ userModel }) {
     this.userModel = userModel;
-
     this.requireAuth = this.requireAuth.bind(this);
   }
   requireAuth(req, res, next) {

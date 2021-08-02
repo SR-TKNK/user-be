@@ -2,14 +2,14 @@ class AuthDaos {
     constructor({ userModel }) {
       this.userModel = userModel;
   
-      this.checkEmailDuplicated = this.checkEmailDuplicated.bind(this);
+      // this.checkEmailDuplicated = this.checkEmailDuplicated.bind(this);
       this.findByEmail = this.findByEmail.bind(this);
     }
   
-    async checkEmailDuplicated(email) {
-      const user = await this.userModel.findOne({ email });
-      return user == null || user == undefined;
-    }
+    // async checkEmailDuplicated(email) {
+    //   const user = await this.userModel.findOne({ email });
+    //   return user == null || user == undefined;
+    // }
   
     async findByEmail(email) {
       try {

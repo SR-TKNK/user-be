@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+const config = require("../../config.json");
 
-
-const dbURI = 'mongodb+srv://admin:admin@market.sdvm0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-mongoose.connect(dbURI, {
+mongoose.connect(config.Database.connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

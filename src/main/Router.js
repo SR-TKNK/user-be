@@ -9,7 +9,7 @@ module.exports = ({ authRoutes }) => {
   router.use(express.urlencoded({ extended: true }));
   router.use(cookieParser());
 
-  router.use("/", authRoutes);
+  router.use("/auth", authRoutes);
 
   return router;
 };

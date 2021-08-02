@@ -1,7 +1,9 @@
 const awilix = require("awilix");
-
 // Main
-const app = require("./main/App");
+const App = require("./main/App");
+const Server = require("./main/Server");
+const Router = require("./main/Router");
+const DatabaseConection = require("./main/DbConnection");
 // Services
 const loginService = require("./service/login");
 // Models
@@ -21,13 +23,24 @@ const authRoutes = require("./routes/authRoutes");
 const container = awilix.createContainer();
 
 container.register({
-    app : awilix.asClass(app),
+    //Main
+    app: awilix.asClass(App),
+    server: awilix.asClass(Server),
+    router: awilix.asFunction(Router),
+    database: awilix.asValue(DatabaseConection),
+    //Services
     loginService : awilix.asClass(loginService),
+    //Models
     userModel : awilix.asClass(userModel),
+    //Controllers
     authController : awilix.asClass(authController),
+    //Daos
     authDaos : awilix.asClass(authDaos),
+    //Authentication
     authentication : awilix.asClass(authentication),
+    //Middleware
     authMiddleware : awilix.asClass(authMiddleware),
+    //Routes
     authRoutes : awilix.asFunction(authRoutes),
 });
 
