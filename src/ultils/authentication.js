@@ -39,12 +39,12 @@ module.exports = class Authentication {
         }
 
         // validation errors
-        if (err.message.includes('user validation failed')) {
-            // console.log(err);
-            Object.values(err.errors).forEach(({ properties }) => {
-                errors[properties.path] = properties.message;
-            });
-        }
+        // if (err.message.includes('user validation failed')) {
+        //     // console.log(err);
+        //     Object.values(err.errors).forEach(({ properties }) => {
+        //         errors[properties.path] = properties.message;
+        //     });
+        // }
 
         return errors;
     }

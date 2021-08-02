@@ -6,7 +6,7 @@ module.exports = class AuthMiddleware {
     this.requireAuth = this.requireAuth.bind(this);
   }
   requireAuth(req, res, next) {
-    const token = req.cookies.jwt;
+    const token = req.body.token;
     // check json web token exists & is verified
     if (token) {
       jwt.verify(token, 'sr-tknk', (err, decodedToken) => {
@@ -14,7 +14,7 @@ module.exports = class AuthMiddleware {
           console.log(err.message);
           res.redirect('/login');
         } else {
-          console.log(decodedToken);
+          // console.log(decodedToken);
           next();
         }
       });

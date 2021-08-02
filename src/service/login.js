@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 module.exports = class AuthLogin {
     constructor({ authDaos, authentication }) {
         this.authDaos = authDaos;
@@ -18,17 +20,15 @@ module.exports = class AuthLogin {
         const auth = await bcrypt.compare(password, user.password);
         if (!auth) {
             return {
+                
                 failure: true,
                 message: "invalid",
             };
         }
         return {
-            token: this.authentication.sign(user._id),
+            token: this.authentication.sign(user.email),
             userId: user._id,
             email: user.email,
-            isVIP: user.isVIP,
-            lastName: user.lastName,
-            firstName: user.firstName,
         };
     }
 }

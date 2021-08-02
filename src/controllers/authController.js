@@ -1,9 +1,11 @@
 class AuthController {
-  constructor({ loginService, authentication }) {
+  constructor({ loginService, authentication, authDaos }) {
     this.authentication = authentication;
     this.loginService = loginService;
+    this.authDaos = authDaos;
 
     this.login = this.login.bind(this);
+    this.postUser = this.postUser.bind(this);
     this.logout = this.logout.bind(this);
   }
 
@@ -12,18 +14,27 @@ class AuthController {
       const params = req.body;
       const serviceResult = await this.loginService.execute(params);
       if (serviceResult.failure) throw new Error(serviceResult.message);
-      res.status(200).header("token", serviceResult.token).send({
+      res.status(200).send({
         valid: true,
-        userId: serviceResult.userId,
+        token: serviceResult.token,
         email: serviceResult.email,
-        isVIP: serviceResult.isVIP,
-        lastName: serviceResult.lastName,
-        firstName: serviceResult.firstName,
       });
     } catch (err) {
       const errors = this.authentication.handleErrors(err.message)
       res.status(400).send({ valid: false, message: errors });
     }
+  }
+
+  async postUser(req, res) {
+    const email = req.body.email;
+    const user = await this.authDaos.findByEmail(email);
+    res.status(200).send({
+      userId: user._id,
+      email: user.email,
+      isVIP: user.isVIP,
+      lastName: user.lastName,
+      firstName: user.firstName,      
+    })
   }
 
   async logout(req, res) {
