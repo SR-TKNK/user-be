@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-user-srtknk
+  labels:
+    name: server-user-srtknk
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      component: server-user-srtknk
+  template:
+    metadata:
+      labels:
+        component: server-user-srtknk
+    spec:
+      containers:
+        - name: server-user-srtknk
+          image: anhiuem492/server-srtknk:server-user
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: 20m
+              memory: 64Mi
+              ephemeral-storage: 64Mi
+            requests:
+              cpu: 20m
+              memory: 64Mi
