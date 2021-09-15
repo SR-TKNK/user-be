@@ -20,7 +20,7 @@ class AuthController {
         email: serviceResult.email,
       });
     } catch (err) {
-      const errors = this.authentication.handleErrors(err.message)
+      const errors = this.authentication.handleErrors(err.message);
       res.status(400).send({ valid: false, message: errors });
     }
   }
@@ -33,13 +33,13 @@ class AuthController {
       email: user.email,
       isVIP: user.isVIP,
       lastName: user.lastName,
-      firstName: user.firstName,      
-    })
+      firstName: user.firstName,
+    });
   }
 
   async logout(req, res) {
-    res.header('jwt', '');
-    res.redirect('/');
+    res.header("jwt", "");
+    res.redirect("/");
   }
 }
 
