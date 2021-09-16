@@ -8,10 +8,16 @@ const DatabaseConection = require("./main/DbConnection");
 const loginService = require("./service/login");
 // Models
 const userModel = require("./models/User");
+const productModel = require("./models/Product");
+const categoryModel = require("./models/Category");
 // Controllers
 const authController = require("./controllers/authController");
+const productController = require("./controllers/productController");
+const categoryController = require("./controllers/categoryController");
 // Daos
 const authDaos = require("./daos/authDaos");
+const productDaos = require("./daos/productDaos");
+const categoryDaos = require("./daos/categoryDaos");
 // Ulti
 const authentication = require("./ultils/authentication");
 // Middleware
@@ -19,29 +25,39 @@ const authMiddleware = require("./middleware/authMiddleware");
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 
 const container = awilix.createContainer();
 
 container.register({
-    //Main
-    app: awilix.asClass(App),
-    server: awilix.asClass(Server),
-    router: awilix.asFunction(Router),
-    database: awilix.asValue(DatabaseConection),
-    //Services
-    loginService : awilix.asClass(loginService),
-    //Models
-    userModel : awilix.asValue(userModel),
-    //Controllers
-    authController : awilix.asClass(authController),
-    //Daos
-    authDaos : awilix.asClass(authDaos),
-    //Authentication
-    authentication : awilix.asClass(authentication),
-    //Middleware
-    authMiddleware : awilix.asClass(authMiddleware),
-    //Routes
-    authRoutes : awilix.asFunction(authRoutes),
+  //Main
+  app: awilix.asClass(App),
+  server: awilix.asClass(Server),
+  router: awilix.asFunction(Router),
+  database: awilix.asValue(DatabaseConection),
+  //Services
+  loginService: awilix.asClass(loginService),
+  //Models
+  userModel: awilix.asValue(userModel),
+  productModel: awilix.asValue(productModel),
+  categoryModel: awilix.asValue(categoryModel),
+  //Controllers
+  authController: awilix.asClass(authController),
+  productController: awilix.asClass(productController),
+  categoryController: awilix.asClass(categoryController),
+  //Daos
+  authDaos: awilix.asClass(authDaos),
+  productDaos: awilix.asClass(productDaos),
+  categoryDaos: awilix.asClass(categoryDaos),
+  //Authentication
+  authentication: awilix.asClass(authentication),
+  //Middleware
+  authMiddleware: awilix.asClass(authMiddleware),
+  //Routes
+  authRoutes: awilix.asFunction(authRoutes),
+  productRoutes: awilix.asFunction(productRoutes),
+  categoryRoutes: awilix.asFunction(categoryRoutes),
 });
 
 module.exports = container;

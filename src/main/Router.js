@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-module.exports = ({ authRoutes }) => {
+module.exports = ({ authRoutes, productRoutes, categoryRoutes }) => {
   const router = express.Router();
   router.use(express.static("public"));
   router.use(cors({ exposedHeaders: "auth-token" }));
@@ -10,6 +10,10 @@ module.exports = ({ authRoutes }) => {
   // router.use(cookieParser());
 
   router.use("/auth", authRoutes);
+
+  router.use("/products", productRoutes);
+
+  router.use("/categories", categoryRoutes);
 
   return router;
 };
