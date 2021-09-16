@@ -1,10 +1,11 @@
 class ProductController {
-  constructor({ productDaos }) {
+  constructor({ productDaos, }) {
     this.productDaos = productDaos;
 
     this.getAllProduct = this.getAllProduct.bind(this);
     this.getProduct = this.getProduct.bind(this);
-    // this.getProductDetail = this.getProductDetail.bind(this);
+    this.getProductByName = this.getProductByName(this);
+    this.getProductByCategory = this.getProductByCategory(this);
   }
 
   async getAllProduct(req, res) {
@@ -27,6 +28,33 @@ class ProductController {
       res.json({
         status: "success",
         product: product,
+      });
+    } catch (err) {
+      return res.status(569).json({ msg: err.message });
+    }
+  }
+
+  async getProductByName(req, res) {
+    try {
+      
+    } catch (err) {
+      return res.status(569).json({ msg: err.message });
+    }
+  }
+
+  async getProductByCategory(req, res) {
+    try {
+      // The query must have form %20
+      const queries = req.params.cq;
+      let result = [];
+      for (q in queries) {
+        const product = await this.productDaos.findAllProductByCategory(q);
+        result.append(product);
+      }
+      let new_result = [...new Set(result)];
+      res.json({
+        status: "success",
+        product: new_result,
       });
     } catch (err) {
       return res.status(569).json({ msg: err.message });

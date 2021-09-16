@@ -1,17 +1,22 @@
+module.exports = class Search {
+  constructor({ productDaos }) {
+    this.productDaos = productDaos;
 
+    this.execute = this.execute.bind(this);
+  }
 
-const requiredLogIn = async () => {
-    if (!req.session.user_id) {
-      return res.redirect("/auth/welcome");
-    } else {
-      _id = req.session.user_id;
-      const user = await User.findById(_id);
-      const shop = await Shop.findById(_id);
-      req.user = user;
-      req.shop = shop;
-      next();
-      if (!user && !shop) {
-        return res.redirect("/auth/welcome");
-      }
+  async execute(params) {
+    try {
+      const queryString = params;
+      const queries = queryString.split("%20");
+      console.log(queries);
+      const products = await this.productDaos.findAllProductByName(queries);
+      return products;
+    } catch (e) {
+      return {
+        failure: true,
+        message: e.message,
+      };
     }
-  };
+  }
+};

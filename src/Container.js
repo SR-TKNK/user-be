@@ -27,6 +27,8 @@ const authMiddleware = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const searchRoutes = require("./routes/searchRoutes");
+
 
 const container = awilix.createContainer();
 
@@ -58,6 +60,8 @@ container.register({
   authRoutes: awilix.asFunction(authRoutes),
   productRoutes: awilix.asFunction(productRoutes),
   categoryRoutes: awilix.asFunction(categoryRoutes),
+  searchRoutes: awilix.asFunction(searchRoutes),
+
 });
 
 module.exports = container;
