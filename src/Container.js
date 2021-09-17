@@ -8,7 +8,7 @@ const DatabaseConection = require("./main/DbConnection");
 const loginService = require("./service/login");
 const productService = require("./service/product");
 const categoryService = require("./service/category");
-const searchService = require("./service/search");
+const searchByNameService = require("./service/searchByName");
 // Models
 const userModel = require("./models/User");
 const productModel = require("./models/Product");
@@ -44,7 +44,7 @@ container.register({
   loginService: awilix.asClass(loginService),
   productService: awilix.asClass(productService),
   categoryService: awilix.asClass(categoryService),
-  searchService: awilix.asClass(searchService),
+  searchByNameService: awilix.asClass(searchByNameService),
   //Models
   userModel: awilix.asValue(userModel),
   productModel: awilix.asValue(productModel),

@@ -1,14 +1,11 @@
 class ProductController {
-  constructor({ productService, searchService }) {
+  constructor({ productService, searchByNameService }) {
     this.productService = productService;
-    this.searchService = searchService;
+    this.searchByNameService = searchByNameService;
 
     this.getAllProduct = this.getAllProduct.bind(this);
     this.getProduct = this.getProduct.bind(this);
-    // this.getProductDetail = this.getProductDetail.bind(this);
-
-    this.getProductByName = this.getProductByName.bind(this);
-    // this.getProductByCategory = this.getProductByCategory.bind(this);
+    this.searchProductByName = this.searchProductByName.bind(this);
   }
 
   async getAllProduct(req, res) {
@@ -39,10 +36,10 @@ class ProductController {
     }
   }
 
-  async getProductByName(req, res) {
+  async searchProductByName(req, res) {
     try {
-      const query = req.params.id;
-      const serviceResult = await this.searchService.findByName(query);
+      const params = { ...req.query };
+      const serviceResult = await this.searchByNameService.execute(params);
       if (serviceResult.failure) throw new Error(serviceResult.message);
       res.status(200).send({
         status: "success",
@@ -52,27 +49,6 @@ class ProductController {
       return res.status(400).send({ msg: err.message });
     }
   }
-
-  // async getProductByCategory(req, res) {
-  //   try {
-  //     // The query must have form %20
-  //     const queries = req.params.cq;
-  //     let result = [];
-  //     for (q in queries) {
-  //       const product = await this.productDaos.findAllProductByCategory(q);
-  //       result.append(product);
-  //     }
-  //     let new_result = [...new Set(result)];
-  //     res.json({
-  //       status: "success",
-  //       product: new_result,
-  //     });
-  //   } catch (err) {
-  //     return res.status(569).json({ msg: err.message });
-  //   }
-  // }
-
-  // async getProductDetail(req, res) {}
 }
 
 module.exports = ProductController;
