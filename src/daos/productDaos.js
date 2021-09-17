@@ -4,8 +4,7 @@ class productDaos {
 
     this.findAllProducts = this.findAllProducts.bind(this);
     this.findOneProduct = this.findOneProduct.bind(this);
-    this.findAllProductByName = this.findAllProductByName.bind(this);
-    this.findAllProductByCategory = this.findAllProductByCategory.bind(this);
+    this.searchAllProductByName = this.searchAllProductByName.bind(this);
   }
 
   async findAllProducts() {
@@ -28,21 +27,12 @@ class productDaos {
     }
   }
 
-  async findAllProductByName(queries) {
+  async searchAllProductByName(param) {
     try {
       const products = await this.productModel
-        .find({ name: { $in: queries } })
+        .find({ name: new RegExp('.*' + param + '.*') })
         .select("code name price");
-      return products;
-    } catch (err) {
-      return { failure: true, message: err.message };
-    }
-  }
-
-  async findAllProductByCategory(value) {
-    try {
-      const result = await this.productModel.find({ category: value });
-      return result;
+      return { products };
     } catch (err) {
       return { failure: true, message: err.message };
     }
