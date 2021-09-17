@@ -23,6 +23,15 @@ class productDaos {
     }
   }
 
+  async findAllByProductID(productIDs) {
+    try {
+      const products = await this.productModel.find({ _id: { $in: productIDs } }).select('code name price');
+      return { products };
+    } catch (err) {
+      return { failure: true, message: err.message };
+    }
+  }
+
   async findOneProduct(value) {
     try {
       const result = await this.productModel.findOne({ code: value });
