@@ -4,19 +4,14 @@ class productDaos {
 
     this.findAllProducts = this.findAllProducts.bind(this);
     this.findOneProduct = this.findOneProduct.bind(this);
+    this.searchAllProductByName = this.searchAllProductByName.bind(this);
   }
 
   async findAllProducts() {
     try {
-      let products = [];
-      const result = await this.productModel.find({});
-      result.map((product) => {
-        products.push({
-          code: product.code,
-          name: product.name,
-          price: product.price,
-        });
-      });
+      const products = await this.productModel
+        .find({})
+        .select("code name price");
       return products;
     } catch (err) {
       return { failure: true, message: err.message };
@@ -34,8 +29,19 @@ class productDaos {
 
   async findOneProduct(value) {
     try {
-      const result = await this.productModel.findOne({ code: value });
-      return result;
+      const product = await this.productModel.findOne({ code: value });
+      return product;
+    } catch (err) {
+      return { failure: true, message: err.message };
+    }
+  }
+
+  async searchAllProductByName(param) {
+    try {
+      const products = await this.productModel
+        .find({ name: new RegExp('.*' + param + '.*') })
+        .select("code name price");
+      return { products };
     } catch (err) {
       return { failure: true, message: err.message };
     }

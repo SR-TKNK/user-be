@@ -6,9 +6,12 @@ class categoryDaos {
   }
 
   async findAllCategories() {
-    const result = await this.categoryModel.find({});
-    console.log(result);
-    return result;
+    try {
+      const result = await this.categoryModel.find({});
+      return result;
+    } catch (err) {
+      return { failure: true, message: err.message };
+    }
   }
 }
 
