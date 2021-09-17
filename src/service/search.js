@@ -2,21 +2,26 @@ module.exports = class Search {
   constructor({ productDaos }) {
     this.productDaos = productDaos;
 
-    this.execute = this.execute.bind(this);
+    this.findByName = this.findByName.bind(this);
   }
 
-  async execute(params) {
-    try {
-      const queryString = params;
-      const queries = queryString.split("%20");
-      console.log(queries);
-      const products = await this.productDaos.findAllProductByName(queries);
-      return products;
-    } catch (e) {
+  async findByName(params) {
+    const queryString = params;
+    const queries = queryString.split("%20");
+    console.log(queries);
+    const products = await this.productDaos.findAllProductByName(queries);
+    if (products.failure) {
       return {
         failure: true,
-        message: e.message,
+        message: "Cannot get any products",
       };
     }
+    if (products.length === 0) {
+      return {
+        failure: true,
+        message: "Cannot get any products",
+      };
+    }
+    return { products: products };
   }
 };

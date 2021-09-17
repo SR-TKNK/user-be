@@ -6,6 +6,9 @@ const Router = require("./main/Router");
 const DatabaseConection = require("./main/DbConnection");
 // Services
 const loginService = require("./service/login");
+const productService = require("./service/product");
+const categoryService = require("./service/category");
+const searchService = require("./service/search");
 // Models
 const userModel = require("./models/User");
 const productModel = require("./models/Product");
@@ -29,7 +32,6 @@ const productRoutes = require("./routes/productRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 
-
 const container = awilix.createContainer();
 
 container.register({
@@ -40,6 +42,9 @@ container.register({
   database: awilix.asValue(DatabaseConection),
   //Services
   loginService: awilix.asClass(loginService),
+  productService: awilix.asClass(productService),
+  categoryService: awilix.asClass(categoryService),
+  searchService: awilix.asClass(searchService),
   //Models
   userModel: awilix.asValue(userModel),
   productModel: awilix.asValue(productModel),
@@ -61,7 +66,6 @@ container.register({
   productRoutes: awilix.asFunction(productRoutes),
   categoryRoutes: awilix.asFunction(categoryRoutes),
   searchRoutes: awilix.asFunction(searchRoutes),
-
 });
 
 module.exports = container;

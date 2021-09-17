@@ -5,7 +5,7 @@ module.exports = ({ productController }) => {
 
   router.get("/", productController.getAllProduct);
 
-  router.post("/:id", productController.getProduct);
+  router.get("/:id", productController.getProduct);
 
   // router.post("/detail/:id", productController.getProductDetail);
 
