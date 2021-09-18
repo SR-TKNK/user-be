@@ -6,6 +6,7 @@ module.exports = ({
   productRoutes,
   categoryRoutes,
   searchRoutes,
+  orderRoutes,
 }) => {
   const router = express.Router();
   router.use(express.static("public"));
@@ -21,6 +22,8 @@ module.exports = ({
   router.use("/categories", categoryRoutes);
 
   router.use("/search", searchRoutes);
+
+  router.use("/orders", orderRoutes);
 
   return router;
 };
