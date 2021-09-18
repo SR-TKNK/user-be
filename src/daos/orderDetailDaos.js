@@ -8,8 +8,8 @@ class orderDetailDaos {
 
     async findAllByOrderID(orderID) {
         try {
-            const orders = await this.orderDetailModel.find({ orderID });
-            return { orders };
+            const orderDetails = await this.orderDetailModel.find({ orderID }).select('-orderID');
+            return { orderDetails };
         } catch (err) {
             return { failure: true, message: err.message || "Something went wrong" };
         }

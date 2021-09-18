@@ -5,9 +5,9 @@ const orderDetailSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     require: [true, "Please enter order ID"],
   },
-  productID: {
-    type:  mongoose.Types.ObjectId,
-    require: [true, "Please enter product ID"],
+  productCode: {
+    type: String,
+    require: [true, "Please enter product Code"],
   },
   quantity: {
     type: Number,
